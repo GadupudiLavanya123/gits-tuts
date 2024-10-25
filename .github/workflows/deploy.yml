@@ -1,6 +1,6 @@
 name: Build and Deploy to S3
 
-# Trigger the workflow on pushes to the main branch
+# Trigger the workflow on pushes to the master branch
 on:
   push:
     branches:
@@ -34,4 +34,4 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
           sudo apt-get install -y awscli
-          aws s3 cp target/demo-0.0.1-SNAPSHOT.jar.jar s3://$AWS_BUCKET_NAME/demo-0.0.1-SNAPSHOT.jar --region $AWS_REGION
+          aws s3 cp target/demo-0.0.1-SNAPSHOT.jar s3://github-lav/demo-0.0.1-SNAPSHOT.jar --region $AWS_REGION
