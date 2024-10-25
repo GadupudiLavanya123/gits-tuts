@@ -26,6 +26,10 @@ jobs:
       - name: Build the project
         run: mvn clean package
 
+      # Optional: List target directory contents for debugging
+      - name: List target directory contents
+        run: ls target
+
       # Step 4: Upload to S3
       - name: Upload to S3
         env:
@@ -34,4 +38,7 @@ jobs:
           AWS_BUCKET: ${{ secrets.AWS_BUCKET_NAME }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
+          # Install AWS CLI if necessary (usually pre-installed)
+          # sudo apt-get install -y awscli # Not needed if using latest runners
+          # Correctly formatted command for uploading to S3
           aws s3 cp target/demo-0.0.1-SNAPSHOT.jar s3://github-lav/demo-0.0.1-SNAPSHOT.jar --region $AWS_REGION
